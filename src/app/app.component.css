@@ -74,7 +74,9 @@
 .main-img {
   position: absolute;
   top: -123px;
-  left: calc(100% - 991px);
+  left: calc(100% - 610px);
+  width: 804px;
+  height: 726px;
 }
 
 .why {
@@ -204,8 +206,8 @@
 .order-img {
   position: absolute;
   top: 0;
-  right: calc(100% - 764px);
-  z-index: -1;
+  right: calc(100% - 600px);
+  z-index: -1; /* Solved problem with position on img */
 }
 .order-form {
   background: #211a16;

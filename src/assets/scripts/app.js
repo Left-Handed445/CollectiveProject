@@ -1,8 +1,9 @@
-document.getElementById('main-action-button').onclick = function() {
+// Smooth scrolling
+document.getElementById('main-action-button').onclick = function () {
     document.getElementById('products').scrollIntoView(
         {behavior: "smooth"}
-        );
-} // Smooth scrolling
+    );
+}
 
 let links = document.querySelectorAll('.header__menu-list-item > a');
 for (let i = 0; i < links.length; i++) {
