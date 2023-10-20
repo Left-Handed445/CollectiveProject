@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { AppService } from './app.service';
 
@@ -7,7 +7,15 @@ import { AppService } from './app.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  jsonData: any;
+  localImageUrls: string[] = [
+    './assets/img/meat.png',
+    './assets/img/food truck.png',
+    './assets/img/order_bg.png',
+  ]
+
+
   currency = '$';
   loaderShowed = true;
   loader = true;
@@ -37,6 +45,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    this.getDataFromExternalSite();
+
     setTimeout(() => {
       this.loaderShowed = false;
     }, 3000);
@@ -44,6 +54,28 @@ export class AppComponent {
       this.loader = false;
     }, 4000);
     this.appService.getData().subscribe(data => this.productsData = data);
+  }
+  getDataFromExternalSite() {
+    this.appService.getData().subscribe(
+      (data: any) => {
+        this.jsonData = data;
+        console.log(this.jsonData);
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  updateDataUrl(extra: string) {
+    this.appService.updateDataUrl(extra);
+    this.getDataFromExternalSite();
+  }
+
+  updateImage(index: number) {
+    if (index < this.localImageUrls.length) {
+      this.jsonData.image = this.localImageUrls[index];
+    }
   }
 
   scrollTo(target: HTMLElement, burger?: any) {
